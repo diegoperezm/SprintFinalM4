@@ -6,6 +6,48 @@ import java.util.Scanner;
 
 public class Principal {
 
+	public static void agregarCliente(Scanner scan, Contenedor con) {
+		System.out.println("INGRESE NOMBRE: ");
+		String nombre = scan.nextLine();
+		
+		System.out.println("INGRESE FECHA (EJEMPLO 01-02-2002): ");
+		String fecha = scan.nextLine();
+		
+		System.out.println("INGRESE RUN (DEBEN SER 8 DIGITOS): ");
+		int run = scan.nextInt();
+		scan.nextLine();
+		
+		System.out.println("INGRESE APELLIDOS: ");
+		String apellidos = scan.nextLine();
+		
+		System.out.println("INGRESE NUMERO DE TELEFONO: ");
+		int telefono = scan.nextInt();
+		scan.nextLine();
+		
+		System.out.println("INGRESE AFP (INGRESE MINIMO 4 CARACTERES Y MAXIMO 30): ");
+		String afp = scan.nextLine();
+		
+		System.out.println("INGRESE SISTEMA DE SALUD (SOLO PUEDE SER 1(FONASA) O 2(ISAPRE)): ");
+		int salud = scan.nextInt();
+		scan.nextLine();
+		
+		System.out.println("INGRESE DIRECCION (MAXIMO 70 CARACTERES): ");
+		String direccion = scan.nextLine();
+		
+		System.out.println("INGRESE COMUNA (MAXIMO 50 CARACTERES): ");
+		String comuna = scan.nextLine();
+		
+		System.out.println("INGRESE EDAD (MAYOR A 0 Y MENOR A 150): ");
+		int edad = scan.nextInt();
+		scan.nextLine();
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+		LocalDate localDate = LocalDate.parse(fecha, formatter);
+		
+		Cliente cliente = new Cliente(nombre,localDate,run,apellidos,telefono,afp,salud,direccion,comuna,edad);
+		con.almacenarCliente(cliente);
+	}
+	
 	public static void agregarProfesional(Scanner scan, Contenedor con) {
 				
 		System.out.println("INGRESE NOMBRE: ");
@@ -32,6 +74,10 @@ public class Principal {
 		
 		Profesional profesional = new Profesional(nombre,localDate,run,titulo,localDate2);		
 		con.almacenarProfesional(profesional);
+	}
+	
+	public static void listarUsuarios(Scanner scan, Contenedor con) {
+		System.out.println("");
 	}
 	
 	public static void main(String[] args) {
