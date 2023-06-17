@@ -157,15 +157,15 @@ public class Principal {
 		Contenedor contenedor = new Contenedor();
 		Scanner leer = new Scanner(System.in);
 		int opcion;
-		Capacitacion cap = new Capacitacion(1,12345678,"dia","hora","lugar","duracion",20);
+		Capacitacion cap = new Capacitacion(1,12345679,"dia","hora","lugar","duracion",20);
 		Capacitacion cap2 = new Capacitacion(2,12345678,"dia","hora","lugar","duracion",20);
 		contenedor.almacenarCapacitacion(cap);
 		contenedor.almacenarCapacitacion(cap2);
 
 		Administrativo adm = new Administrativo("adm", LocalDate.of(2020, Month.APRIL, 20), 12345678, "area","pescador");
-		Administrativo adm2 = new Administrativo("adm2", LocalDate.of(2020, Month.APRIL, 20), 12345678, "area","pescador");
-	//	contenedor.almacenarAdministrativo(adm);
-//		contenedor.almacenarAdministrativo(adm2);
+		Administrativo adm2 = new Administrativo("adm2", LocalDate.of(2020, Month.APRIL, 20), 12345679, "area","pescador");
+		contenedor.almacenarAdministrativo(adm);
+		contenedor.almacenarAdministrativo(adm2);
 
 		/*
 		 * Usuario user = new Usuario("Algo",LocalDate.now(),11111111); Cliente cliente
@@ -236,7 +236,7 @@ public class Principal {
 			agregarCapacitacion(leer, contenedor);
 			break;
 		case 5:
-			//eliminarUsuario();
+			eliminarUsuarioPorRun(leer, contenedor);
 			break;
 		case 6:
 			listarUsuarios(contenedor);
@@ -273,7 +273,11 @@ public class Principal {
 
 	}
 
-	private static void listarUsuarioTipo(Scanner scan, Contenedor con) {
+	public static void eliminarUsuarioPorRun(Scanner scan, Contenedor con) {
+	 con.eliminarUsuario(12345678);	
+	}
+
+	public static void listarUsuarioTipo(Scanner scan, Contenedor con) {
 		int opcion;
 
 		System.out.println("------- SELECCIONE TIPO DE USUARIO  -------");
