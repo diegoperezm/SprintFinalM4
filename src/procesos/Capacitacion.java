@@ -18,12 +18,14 @@ public class Capacitacion {
 		this.identificador = identificador;
 		if (rutCliente > 99999999) throw new IllegalArgumentException("Entrada invalida, rut: corresponde a un número menor a 99.999.999");
 		this.rutCliente = rutCliente;
-		// como validar que sea un dia entre lunes y domingo 
-		// (en ese formato)
-		this.dia = dia;
+		if(dia.toLowerCase().equals("lunes") || dia.toLowerCase().equals("martes") || dia.toLowerCase().equals("miercoles") || dia.toLowerCase().equals("jueves") || dia.toLowerCase().equals("viernes") || dia.toLowerCase().equals("sabado") || dia.toLowerCase().equals("domingo") ) {
+			this.dia = dia;		
+		}else {
+			throw new IllegalArgumentException("Entrada invalida. Ingrese un dia entre lunes y domingo");
+		}		
 		// como validar formato HH:MM (hora desde 0 a 23, minutos entre 0 y 59) 
 		this.hora = hora;
-		if(lugar.length() < 10 && lugar.length() > 50) throw new IllegalArgumentException("Entrada invalida lugar: mínimo 10 caracteres, máximo 50");
+		if(lugar.length() < 10 || lugar.length() > 50) throw new IllegalArgumentException("Entrada invalida lugar: mínimo 10 caracteres, máximo 50");
 		this.lugar = lugar;
 		// duracion es un String ???? 
 		if(duracion.length() > 70) throw new IllegalArgumentException("Entrada invalida duración: máximo 70 caracteres");

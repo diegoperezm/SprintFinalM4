@@ -55,12 +55,12 @@ public class Usuario implements Asesoria {
 
 	@Override
 	public String toString() {
-		return "Usuario [nombre=" + nombre + ", fechaNacimiento=" + fechaNacimiento + ", run=" + run + "]";
+		return "Usuario [nombre=" + nombre + ", fechaNacimiento=" + formatoFecha(fechaNacimiento) + ", run=" + run + "]";
 	}
 
 	@Override
 	public String analizarUsuario() {
-		return "nombre: " +   getNombre() + " RUN: " + getRun();
+		return "Nombre: " +   getNombre() + " RUN: " + getRun();
 	}
 	
 	public String formatoFecha(LocalDate fecha) {
@@ -69,4 +69,6 @@ public class Usuario implements Asesoria {
 		
 		return fechaFormateada;
 	}
+	
+	
 }

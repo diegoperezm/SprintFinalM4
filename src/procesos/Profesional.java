@@ -1,6 +1,7 @@
 package procesos;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.InputMismatchException;
 
 public class Profesional extends Usuario {
@@ -10,9 +11,8 @@ public class Profesional extends Usuario {
 	public Profesional() {};
 	public Profesional(String nombre, LocalDate fechaNacimiento, int run, String titulo, LocalDate fechaIngreso) {
 		super(nombre, fechaNacimiento, run);
-		if(titulo.length() < 10 && titulo.length() > 50 )  throw new InputMismatchException("Entrada no valida, titulo: mínimo 10 caracteres, máximo 50 ");  
+		if(titulo.length() < 10 || titulo.length() > 50 )  throw new InputMismatchException("Entrada no valida, titulo: mínimo 10 caracteres, máximo 50 ");  
 		this.titulo = titulo;
-		// como validar dd/mm/aa
 		this.fechaIngreso = fechaIngreso;
 	}
 
@@ -34,6 +34,13 @@ public class Profesional extends Usuario {
 
 	@Override
 	public String analizarUsuario() {
-		return super.analizarUsuario() + " " + getTitulo() + " " + getFechaIngreso();
+		return super.analizarUsuario() + " Titulo: " + getTitulo() + " Fecha de ingreso: " + formatoFecha(fechaIngreso);
+	}
+	
+	public String formatoFecha(LocalDate fecha) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+		String fechaFormateada = fecha.format(formatter);
+		
+		return fechaFormateada;
 	}
 }

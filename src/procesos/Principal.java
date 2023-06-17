@@ -70,8 +70,8 @@ public class Principal {
 		LocalDate localDate = LocalDate.parse(fecha, formatter);
 		LocalDate localDate2 = LocalDate.parse(fechaIngreso, formatter);
 
-		System.out.println(formatter.format(localDate)); // localdate = año/mes/dia formatter.format(localDate) =
-															// dia/mes/año
+		// System.out.println(formatter.format(localDate)); localdate = año/mes/dia
+		// formatter.format(localDate) = dia/mes/año
 
 		Profesional profesional = new Profesional(nombre, localDate, run, titulo, localDate2);
 		con.almacenarProfesional(profesional);
@@ -139,16 +139,16 @@ public class Principal {
 		System.out.println("------- LISTA DE USUARIOS -------");
 		con.listarUsuarios();
 	}
-	
+
 	public static void listarCapacitaciones(Contenedor con) {
 		System.out.println("------- LISTA DE CAPACITACIONES -------");
 		con.listarCapacitaciones();
 	}
-	
+
 	public static void clearTerminal() {
 		System.out.print("\033[H\033[2J");
 		System.out.flush();
-		
+
 	}
 
 	public static void main(String[] args) {
@@ -156,9 +156,9 @@ public class Principal {
 		Contenedor contenedor = new Contenedor();
 		Scanner leer = new Scanner(System.in);
 		int opcion;
-		Capacitacion cap = new Capacitacion(1,12345678,"dia","hora","lugar","duracion",20);
-		Capacitacion cap2 = new Capacitacion(2,12345678,"dia","hora","lugar","duracion",20);
+		Capacitacion cap = new Capacitacion(1, 12345678, "domingo", "hora", "aaaaaaaaaa", "duracion", 20);
 		contenedor.almacenarCapacitacion(cap);
+		Capacitacion cap2 = new Capacitacion(1, 12345678, "martes", "hora", "aaaaaaaaaa", "duracion", 20);
 		contenedor.almacenarCapacitacion(cap2);
 		/*
 		 * Usuario user = new Usuario("Algo",LocalDate.now(),11111111); Cliente cliente
@@ -183,22 +183,8 @@ public class Principal {
 		 * para salir del programa - opcion incorrecta debe reintentar
 		 */
 
-		System.out.println("------- MENU DE OPCIONES -------");
-		System.out.println("   1. ALMACENAR CLIENTE         ");
-		System.out.println("   2. ALMACENAR PROFESIONAL     ");
-		System.out.println("   3. ALMACENAR ADMINISTRATIVO  ");
-		System.out.println("   4. ALMACENAR CAPACITACION    ");
-		System.out.println("   5. ELIMINAR USUARIO          ");
-		System.out.println("   6. LISTAR USUARIOS           ");
-		System.out.println("   7. LISTAR USUARIOS POR TIPO  ");
-		System.out.println("   8. LISTAR CAPACITACIONES     ");
-		System.out.println("   9. SALIR DEL PROGRAMA        ");
-		System.out.println("--------------------------------");
-		System.out.println(" DIGITE UNA OPCION: ");
-		opcion = leer.nextInt();
-		leer.nextLine();
+		do {
 
-		while(opcion < 1 || opcion > 9) {
 			System.out.println("------- MENU DE OPCIONES -------");
 			System.out.println("   1. ALMACENAR CLIENTE         ");
 			System.out.println("   2. ALMACENAR PROFESIONAL     ");
@@ -213,57 +199,55 @@ public class Principal {
 			System.out.println(" DIGITE UNA OPCION: ");
 			opcion = leer.nextInt();
 			leer.nextLine();
-		}
-		
-		switch (opcion) {
-		case 1:
-			agregarCliente(leer, contenedor);
-			break;
-		case 2:
-			agregarProfesional(leer, contenedor);
-			break;
-		case 3:
-			agregarAdministrativo(leer, contenedor);
-			break;
-		case 4:
-			agregarCapacitacion(leer, contenedor);
-			break;
-		case 5:
-			//eliminarUsuario();
-			break;
-		case 6:
-			listarUsuarios(contenedor);
-		case 7:
-			//listarUsuarioTipo();
-			break;
-		case 8:
-			listarCapacitaciones(contenedor);
-			break;
-		case 9:
-			clearTerminal();
-			System.out.println("HAS SALIDO DEL PROGRAMA. HASTA LUEGO!");
-			System.exit(0);
-			break;
-		}
 
-		
-		/*
-		 * System.out.println("INGRESE NOMBRE DEL CLIENTE: ");
-		 * cliente.setNombre(leer.nextLine()); // HAY QUE VALIDAR ESTO
-		 * 
-		 * System.out.println("INGRESE FECHA DE NACIMIENTO: ");
-		 * cliente.setFechaNacimiento(leer.nextLine());
-		 * 
-		 * System.out.println("INGRESE RUN: "); cliente.setRun(leer.nextInt());
-		 * leer.nextLine(); //consume salto de linea
-		 * 
-		 * System.out.println("INGRESE APELLIDOS: ");
-		 * cliente.setApellidos(leer.nextLine());
-		 * 
-		 * System.out.println("INGRESE TELEFONO DE CONTACTO: ");
-		 * cliente.setTelefono(leer.nextInt()); leer.nextLine();
-		 */
+			while (opcion < 1 || opcion > 9) {
+				System.out.println("------- MENU DE OPCIONES -------");
+				System.out.println("   1. ALMACENAR CLIENTE         ");
+				System.out.println("   2. ALMACENAR PROFESIONAL     ");
+				System.out.println("   3. ALMACENAR ADMINISTRATIVO  ");
+				System.out.println("   4. ALMACENAR CAPACITACION    ");
+				System.out.println("   5. ELIMINAR USUARIO          ");
+				System.out.println("   6. LISTAR USUARIOS           ");
+				System.out.println("   7. LISTAR USUARIOS POR TIPO  ");
+				System.out.println("   8. LISTAR CAPACITACIONES     ");
+				System.out.println("   9. SALIR DEL PROGRAMA        ");
+				System.out.println("--------------------------------");
+				System.out.println(" DIGITE UNA OPCION: ");
+				opcion = leer.nextInt();
+				leer.nextLine();
+			}
 
+			switch (opcion) {
+			case 1:
+				agregarCliente(leer, contenedor);
+				break;
+			case 2:
+				agregarProfesional(leer, contenedor);
+				break;
+			case 3:
+				agregarAdministrativo(leer, contenedor);
+				break;
+			case 4:
+				agregarCapacitacion(leer, contenedor);
+				break;
+			case 5:
+				// eliminarUsuario();
+				break;
+			case 6:
+				listarUsuarios(contenedor);
+			case 7:
+				// listarUsuarioTipo();
+				break;
+			case 8:
+				listarCapacitaciones(contenedor);
+				break;
+			case 9:
+				clearTerminal();
+				System.out.println("HAS SALIDO DEL PROGRAMA. HASTA LUEGO!");
+				System.exit(0);
+				break;
+			}
+		} while (opcion != 9);
 	}
 
 }
