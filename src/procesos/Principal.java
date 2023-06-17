@@ -135,8 +135,14 @@ public class Principal {
 
 	}
 
-	public static void listarUsuarios(Scanner scan, Contenedor con) {
-		System.out.println("");
+	public static void listarUsuarios(Contenedor con) {
+		System.out.println("------- LISTA DE USUARIOS -------");
+		con.listarUsuarios();
+	}
+	
+	public static void listarCapacitaciones(Contenedor con) {
+		System.out.println("------- LISTA DE CAPACITACIONES -------");
+		con.listarCapacitaciones();
 	}
 
 	public static void main(String[] args) {
@@ -144,7 +150,10 @@ public class Principal {
 		Contenedor contenedor = new Contenedor();
 		Scanner leer = new Scanner(System.in);
 		int opcion;
-
+		Capacitacion cap = new Capacitacion(1,12345678,"dia","hora","lugar","duracion",20);
+		Capacitacion cap2 = new Capacitacion(2,12345678,"dia","hora","lugar","duracion",20);
+		contenedor.almacenarCapacitacion(cap);
+		contenedor.almacenarCapacitacion(cap2);
 		/*
 		 * Usuario user = new Usuario("Algo",LocalDate.now(),11111111); Cliente cliente
 		 * = new Cliente();
@@ -196,10 +205,22 @@ public class Principal {
 		case 4:
 			agregarCapacitacion(leer, contenedor);
 			break;
+		case 5:
+			//eliminarUsuario();
+			break;
+		case 6:
+			listarUsuarios(contenedor);
+		case 7:
+			//listarUsuarioTipo();
+			break;
+		case 8:
+			listarCapacitaciones(contenedor);
+			break;
+		case 9:
+			break;
 		}
 
-		contenedor.listarUsuarios();
-
+		
 		/*
 		 * System.out.println("INGRESE NOMBRE DEL CLIENTE: ");
 		 * cliente.setNombre(leer.nextLine()); // HAY QUE VALIDAR ESTO
