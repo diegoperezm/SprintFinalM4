@@ -192,6 +192,23 @@ public class Principal {
 		opcion = leer.nextInt();
 		leer.nextLine();
 
+		while(opcion < 1 || opcion > 9) {
+			System.out.println("------- MENU DE OPCIONES -------");
+			System.out.println("   1. ALMACENAR CLIENTE         ");
+			System.out.println("   2. ALMACENAR PROFESIONAL     ");
+			System.out.println("   3. ALMACENAR ADMINISTRATIVO  ");
+			System.out.println("   4. ALMACENAR CAPACITACION    ");
+			System.out.println("   5. ELIMINAR USUARIO          ");
+			System.out.println("   6. LISTAR USUARIOS           ");
+			System.out.println("   7. LISTAR USUARIOS POR TIPO  ");
+			System.out.println("   8. LISTAR CAPACITACIONES     ");
+			System.out.println("   9. SALIR DEL PROGRAMA        ");
+			System.out.println("--------------------------------");
+			System.out.println(" DIGITE UNA OPCION: ");
+			opcion = leer.nextInt();
+			leer.nextLine();
+		}
+		
 		switch (opcion) {
 		case 1:
 			agregarCliente(leer, contenedor);
@@ -217,6 +234,8 @@ public class Principal {
 			listarCapacitaciones(contenedor);
 			break;
 		case 9:
+			System.out.println("HAS SALIDO DEL PROGRAMA. HASTA LUEGO!");
+			System.exit(0);
 			break;
 		}
 
