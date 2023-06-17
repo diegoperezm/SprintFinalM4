@@ -4,22 +4,17 @@ import java.util.InputMismatchException;
 
 public class Revision {
 	private int idRevision;
-	/*
-	 * Identificador de la visita en terreno: obligatorio, número de la vista a la
-	 * que se asóciala revisión.
-	 */
 	private int idVisita;
 	private String nombreRevision;
 	private String detalle;
 	private int estado;
+	private static int idAuto = 0;
 
-	public Revision(int idRevision, int idVisita, String nombreRevision, String detalle, int estado) {
-		// como validar esto
-		this.idRevision = idRevision;
-		// como validar esto ?
+	public Revision(int idVisita, String nombreRevision, String detalle, int estado) {
+		this.idRevision = ++idAuto;
 		this.idVisita = idVisita;
 
-		if (nombreRevision.length() < 10 && nombreRevision.length() > 50)
+		if (nombreRevision.length() < 10 || nombreRevision.length() > 50)
 			throw new InputMismatchException("Entrada no valida, nombre revisión:  mínimo 10 caracteres, máximo 50 ");
 		this.nombreRevision = nombreRevision;
 
@@ -73,4 +68,11 @@ public class Revision {
 		this.estado = estado;
 	}
 
+	@Override
+	public String toString() {
+		return "Revision [idRevision=" + idRevision + ", idVisita=" + idVisita + ", nombreRevision=" + nombreRevision
+				+ ", detalle=" + detalle + ", estado=" + estado + "]";
+	}
+
+	
 }

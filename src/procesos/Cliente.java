@@ -2,6 +2,8 @@ package procesos;
 
 import java.time.LocalDate;
 import java.util.InputMismatchException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Cliente extends Usuario {
 
@@ -20,15 +22,16 @@ public class Cliente extends Usuario {
 			int telefono, String afp, int sistemaSalud, String direccion, String comuna, int edad) {
 		super(nombre, fechaNacimiento, run);
 
-		if (apellidos.length() < 5 && apellidos.length() > 30)
+		if (apellidos.length() < 5 || apellidos.length() > 30)
 			throw new InputMismatchException("Entrada no valida, apellidos: mínimo 5 caracteres, máximo 30 ");
 		this.apellidos = apellidos;
-		// falta validar telefono
+		if (!validarFono(telefono))
+			throw new InputMismatchException("Entrada no valida, Telefono: debe ingresar numeros");
 		this.telefono = telefono;
-		if (afp.length() < 4 && afp.length() > 30)
+		if (afp.length() < 4 || afp.length() > 30)
 			throw new InputMismatchException("Entrada no valida, afp: mínimo 4 caracteres, máximo 30");
 		this.afp = afp;
-		if (sistemaSalud < 1 && sistemaSalud > 2)
+		if (sistemaSalud < 1 || sistemaSalud > 2)
 			throw new InputMismatchException("Entrada no valida, sistema salud: solo puede ser 1(Fonasa) o 2(Isapre)");
 		this.sistemaSalud = sistemaSalud;
 		if (direccion.length() > 70)
@@ -38,7 +41,7 @@ public class Cliente extends Usuario {
 		if (comuna.length() > 50)
 			throw new InputMismatchException("Entrada no valida, comuna: máximo 50 caracteres");
 		this.comuna = comuna;
-		if (edad < 0 && edad > 149)
+		if (edad < 0 || edad > 149)
 			throw new InputMismatchException("Entrada no valida, edad: número mayor o igual a cero, y menor a 150");
 		this.edad = edad;
 	}
@@ -105,6 +108,19 @@ public class Cliente extends Usuario {
 
 	@Override
 	public String analizarUsuario() {
-		return super.analizarUsuario();
+		return super.analizarUsuario() + " " + this.toString();
 	}
+	
+	@Override
+	public String toString() {
+		return "Cliente [apellidos=" + apellidos + ", telefono=" + telefono + ", afp=" + afp + ", sistemaSalud="
+				+ sistemaSalud + ", direccion=" + direccion + ", comuna=" + comuna + ", edad=" + edad + "]";
+	}
+
+	public boolean validarFono(int telefono) {
+		Pattern formatoFono = Pattern.compile("[0-9]*");
+		Matcher matchFono = formatoFono.matcher(Integer.toString(telefono));
+		return matchFono.find();
+	}
+
 }

@@ -1,7 +1,6 @@
 package procesos;
 
 import java.time.LocalDate;
-import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
@@ -21,7 +20,7 @@ public class Principal {
 		System.out.println("INGRESE APELLIDOS: ");
 		String apellidos = scan.nextLine();
 
-		System.out.println("INGRESE NUMERO DE TELEFONO: ");
+		System.out.println("INGRESE NUMERO DE TELEFONO (MAXIMO 10 NUMEROS): ");
 		int telefono = scan.nextInt();
 		scan.nextLine();
 
@@ -71,9 +70,6 @@ public class Principal {
 		LocalDate localDate = LocalDate.parse(fecha, formatter);
 		LocalDate localDate2 = LocalDate.parse(fechaIngreso, formatter);
 
-		// System.out.println(formatter.format(localDate)); localdate = año/mes/dia
-		// formatter.format(localDate) = dia/mes/año
-
 		Profesional profesional = new Profesional(nombre, localDate, run, titulo, localDate2);
 		con.almacenarProfesional(profesional);
 	}
@@ -105,9 +101,6 @@ public class Principal {
 	}
 
 	public static void agregarCapacitacion(Scanner scan, Contenedor con) {
-		System.out.println("INGRESE IDENTIFICADOR: ");
-		int identificador = scan.nextInt();
-		scan.nextLine();
 
 		System.out.println("INGRESE RUT CLIENTE: ");
 		int rutCliente = scan.nextInt();
@@ -129,11 +122,53 @@ public class Principal {
 		int cantidadAsistentes = scan.nextInt();
 		scan.nextLine();
 
-		Capacitacion capacitacion = new Capacitacion(identificador, rutCliente, dia, hora, lugar, duracion,
-				cantidadAsistentes);
+		Capacitacion capacitacion = new Capacitacion(rutCliente, dia, hora, lugar, duracion, cantidadAsistentes);
 
 		con.almacenarCapacitacion(capacitacion);
 
+	}
+
+	public static void eliminarUsuarioPorRun(Scanner scan, Contenedor con) {
+		System.out.println("INGRESE RUN DEL USUARIO A ELIMINAR: ");
+		int run = scan.nextInt();
+		scan.nextLine();
+		con.eliminarUsuario(run);
+	}
+
+	public static void listarUsuarioTipo(Scanner scan, Contenedor con) {
+		int opcion;
+
+		System.out.println("------- SELECCIONE TIPO DE USUARIO  -------");
+		System.out.println("   1.  CLIENTE         ");
+		System.out.println("   2.  PROFESIONAL     ");
+		System.out.println("   3.  ADMINISTRATIVO  ");
+
+		opcion = scan.nextInt();
+		scan.nextLine();
+
+		while (opcion < 1 || opcion > 3) {
+			System.out.println("------- SELECCIONE TIPO DE USUARIO  -------");
+			System.out.println("   1.  CLIENTE         ");
+			System.out.println("   2.  PROFESIONAL     ");
+			System.out.println("   3.  ADMINISTRATIVO  ");
+			opcion = scan.nextInt();
+			scan.nextLine();
+
+		}
+		switch (opcion) {
+		case 1:
+			System.out.println("   LISTA DE  CLIENTES:");
+			con.listarUsuariosPorTipo(new Cliente());
+			break;
+		case 2:
+			System.out.println("   LISTA DE  PROFESIONALES:");
+			con.listarUsuariosPorTipo(new Profesional());
+			break;
+		case 3:
+			System.out.println("   LISTA DE  ADMINISTRATIVOS:");
+			con.listarUsuariosPorTipo(new Administrativo());
+			break;
+		}
 	}
 
 	public static void listarUsuarios(Contenedor con) {
@@ -149,7 +184,6 @@ public class Principal {
 	public static void clearTerminal() {
 		System.out.print("\033[H\033[2J");
 		System.out.flush();
-
 	}
 
 	public static void main(String[] args) {
@@ -158,29 +192,13 @@ public class Principal {
 		Scanner leer = new Scanner(System.in);
 		int opcion;
 
-		/*
-		 * Usuario user = new Usuario("Algo",LocalDate.now(),11111111); Cliente cliente
-		 * = new Cliente();
-		 * 
-		 * agregarProfesional(leer, contenedor);
-		 * 
-		 * 
-		 * System.out.println(user + " " +
-		 * user.formatoFecha(user.getFechaNacimiento()));
-		 * 
-		 * DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-		 * String date = "15-10-2018"; LocalDate localDate = LocalDate.parse(date,
-		 * formatter);
-		 * 
-		 * System.out.println(localDate);
-		 * System.out.println(formatter.format(localDate));
-		 */
-
-		/*
-		 * MENU 9 opciones - 8 para las acciones indicadad en el listado anterior - 1
-		 * para salir del programa - opcion incorrecta debe reintentar
-		 */
-
+	
+		Profesional pro = new Profesional("algo", LocalDate.of(2002, 05, 20), 12345678, "aaaaaaaaaaa",
+				LocalDate.of(2002, 05, 20));
+		contenedor.almacenarProfesional(pro);
+		Capacitacion cap = new Capacitacion(12345678, "lunes", "20:05", "aaaaaaaaaa", "duracion", 25);
+		contenedor.almacenarCapacitacion(cap);
+		
 		do {
 
 			System.out.println("------- MENU DE OPCIONES -------");
@@ -197,7 +215,6 @@ public class Principal {
 			System.out.println(" DIGITE UNA OPCION: ");
 			opcion = leer.nextInt();
 			leer.nextLine();
-		
 
 			while (opcion < 1 || opcion > 9) {
 				System.out.println("------- MENU DE OPCIONES -------");
@@ -230,12 +247,13 @@ public class Principal {
 				agregarCapacitacion(leer, contenedor);
 				break;
 			case 5:
-				// eliminarUsuario();
+				eliminarUsuarioPorRun(leer, contenedor);
 				break;
 			case 6:
 				listarUsuarios(contenedor);
+				break;
 			case 7:
-				// listarUsuarioTipo();
+				listarUsuarioTipo(leer, contenedor);
 				break;
 			case 8:
 				listarCapacitaciones(contenedor);
@@ -247,48 +265,7 @@ public class Principal {
 				break;
 			}
 		} while (opcion != 9);
-	}
-
-	public static void eliminarUsuarioPorRun(Scanner scan, Contenedor con) {
-	 con.eliminarUsuario(12345678);	
-	}
-
-	public static void listarUsuarioTipo(Scanner scan, Contenedor con) {
-		int opcion;
-
-		System.out.println("------- SELECCIONE TIPO DE USUARIO  -------");
-		System.out.println("   1.  CLIENTE         ");
-		System.out.println("   2.  PROFESIONAL     ");
-		System.out.println("   3.  ADMINISTRATIVO  ");	
-
-		opcion = scan.nextInt();
-		scan.nextLine();
-
-		while(opcion < 1 || opcion > 3) {
-        System.out.println("------- SELECCIONE TIPO DE USUARIO  -------");
-	 	System.out.println("   1.  CLIENTE         ");
-		System.out.println("   2.  PROFESIONAL     ");
-		System.out.println("   3.  ADMINISTRATIVO  ");	
-
-		}
-		switch (opcion) {
-		case 1:
-
-       	 	System.out.println("   LISTA DE  CLIENTES:");
-     	    con.listarUsuariosPorTipo(new Cliente());   	
-			break;
-     	case 2:
-
-       	 	System.out.println("   LISTA DE  PROFESIONALES:");
-     	    con.listarUsuariosPorTipo(new Profesional());   	
-			break;
-     	case 3:
-       	 	System.out.println("   LISTA DE  ADMINISTRATIVOS:");
-     	    con.listarUsuariosPorTipo(new Administrativo());   	
-			break;
-		}
-
-	  	
+		leer.close();
 	}
 
 }

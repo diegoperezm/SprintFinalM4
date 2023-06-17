@@ -1,5 +1,8 @@
 package procesos;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Capacitacion {
 	private int identificador;
 	private int rutCliente;
@@ -8,14 +11,14 @@ public class Capacitacion {
 	private String lugar;
 	private String duracion;
 	private int cantidadAsistentes;
+	private static int idAuto = 0;
 
 	public Capacitacion() {
 	};
 
-	public Capacitacion(int identificador, int rutCliente, String dia, String hora, String lugar, String duracion,
-			int cantidadAsistentes) {
-		// como validar que no esta vacio
-		this.identificador = identificador;
+	public Capacitacion(int rutCliente, String dia, String hora, String lugar, String duracion,
+			int cantidadAsistentes) {	
+		this.identificador = ++idAuto;
 		if (rutCliente > 99999999) throw new IllegalArgumentException("Entrada invalida, rut: corresponde a un número menor a 99.999.999");
 		this.rutCliente = rutCliente;
 		if(dia.toLowerCase().equals("lunes") || dia.toLowerCase().equals("martes") || dia.toLowerCase().equals("miercoles") || dia.toLowerCase().equals("jueves") || dia.toLowerCase().equals("viernes") || dia.toLowerCase().equals("sabado") || dia.toLowerCase().equals("domingo") ) {
@@ -23,11 +26,11 @@ public class Capacitacion {
 		}else {
 			throw new IllegalArgumentException("Entrada invalida. Ingrese un dia entre lunes y domingo");
 		}		
-		// como validar formato HH:MM (hora desde 0 a 23, minutos entre 0 y 59) 
+		if(!validarHora(hora))
+			throw new IllegalArgumentException("Entrada invalida. Ingrese una hora con formato hh:mm (ej: 20:45)");
 		this.hora = hora;
 		if(lugar.length() < 10 || lugar.length() > 50) throw new IllegalArgumentException("Entrada invalida lugar: mínimo 10 caracteres, máximo 50");
 		this.lugar = lugar;
-		// duracion es un String ???? 
 		if(duracion.length() > 70) throw new IllegalArgumentException("Entrada invalida duración: máximo 70 caracteres");
 		this.duracion = duracion;
 		if(cantidadAsistentes > 1000) throw new IllegalArgumentException("Entrada invalida, cantidad asistentes: máximo 1000 ");
@@ -106,5 +109,11 @@ public class Capacitacion {
 				+ ", hora=" + hora + ", lugar=" + lugar + ", duracion=" + duracion + ", cantidadAsistentes="
 				+ cantidadAsistentes + "]";
 	}
-
+	
+	public boolean validarHora(String hora) {
+		Pattern formatoHora = Pattern.compile("^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$");
+		Matcher matchHora = formatoHora.matcher(hora);
+		return matchHora.find();
+	}
+	
 }
