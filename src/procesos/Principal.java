@@ -109,4 +109,250 @@ public class Principal {
 		
 	}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+public static void agregarAdministrativo(Scanner scan, Contenedor con) {
+		System.out.println("INGRESE NOMBRE: ");
+		String nombre = scan.nextLine();
+		
+		System.out.println("INGRESE FECHA NACIMIENTO (EJEMPLO 01-02-2002): ");
+		String fecha = scan.nextLine();
+
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+		LocalDate fechaNacimiento = LocalDate.parse(fecha, formatter);
+		
+		System.out.println("INGRESE RUN (DEBEN SER 8 DIGITOS): ");
+		int run = scan.nextInt();
+		scan.nextLine();
+		
+		System.out.println("INGRESE AREA: ");
+		String area = scan.nextLine();
+		
+		System.out.println("INGRESE EXPERIENCIA PREVIA: ");
+		String experienciaPrev = scan.nextLine();
+	
+        Administrativo administrativo = new Administrativo(nombre, fechaNacimiento, run,  area, experienciaPrev);
+        
+        con.almacenarAdministrativo(administrativo);
+
+}
+
+	public static void agregarCapacitacion(Scanner scan, Contenedor con) {
+	    System.out.println("INGRESE IDENTIFICADOR: ");
+		int identificador = scan.nextInt();
+		scan.nextLine();
+
+	    System.out.println("INGRESE RUT CLIENTE: ");
+		int rutCliente = scan.nextInt();
+		scan.nextLine();
+
+		System.out.println("INGRESE DIA: ");
+		String dia = scan.nextLine();
+
+		System.out.println("INGRESE HORA: ");
+		String hora = scan.nextLine();
+		
+		System.out.println("INGRESE LUGAR: ");
+		String lugar = scan.nextLine();
+
+		System.out.println("INGRESE DURACION: ");
+		String duracion = scan.nextLine();
+	
+	    System.out.println("INGRESE CANTIDAD DE ASISTENTES: ");
+		int cantidadAsistentes = scan.nextInt();
+		scan.nextLine();
+
+        Capacitacion capacitacion = new Capacitacion(identificador, rutCliente, dia, hora, lugar, duracion, cantidadAsistentes);
+	   
+        con.almacenarCapacitacion(capacitacion);
+		
+}	
+	
+	
 }
