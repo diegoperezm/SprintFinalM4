@@ -1,6 +1,7 @@
 package procesos;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Contenedor {
     ArrayList<Asesoria> listaAsesorias;
@@ -62,15 +63,29 @@ public class Contenedor {
 	   }
     }
 /*
- *permite desplegar la lista completa de usuarios,
- * independiente del tipo. 
- * En este método solo se deben desplegar los datos de la clase usuario.
- * 
+ * recibe un tipo de usuario (cliente, administrador o profesional), y 
+ * retorna los datos respectivos según el tipo de usuario.
  */
-    public void listarUsuariosPorTipo(Usuario usuario) {
-      System.out.println(usuario.getClass());	
-    }
-	
+    public void listarUsuariosPorTipo(Asesoria tipoUsuario) {
+       List<Asesoria> listaPorTipoUsuario = new ArrayList<>();
+       List<Asesoria> listaUsuarios = this.getListaAsesorias(); 
+
+     // verficar este codigo 
+       if(listaUsuarios.size() < 1) {
+    	   System.out.println("NO EXISTEN USUARIOS REGISTRADOS");
+       };
+       
+       for (Asesoria usuario : listaUsuarios) {
+    	   if(usuario.getClass().equals(tipoUsuario.getClass())) {
+    		   listaPorTipoUsuario.add(usuario);
+    	   }
+       }
+       
+      for (Asesoria usuario : listaPorTipoUsuario) {
+	        System.out.println(usuario);	
+	} 
+	}
+    	
 /*	
  *Listar capacitaciones: 
  *este método despliega las capacitaciones registradas en la

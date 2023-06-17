@@ -1,6 +1,7 @@
 package procesos;
 
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
@@ -160,6 +161,12 @@ public class Principal {
 		Capacitacion cap2 = new Capacitacion(2,12345678,"dia","hora","lugar","duracion",20);
 		contenedor.almacenarCapacitacion(cap);
 		contenedor.almacenarCapacitacion(cap2);
+
+		Administrativo adm = new Administrativo("adm", LocalDate.of(2020, Month.APRIL, 20), 12345678, "area","pescador");
+		Administrativo adm2 = new Administrativo("adm2", LocalDate.of(2020, Month.APRIL, 20), 12345678, "area","pescador");
+	//	contenedor.almacenarAdministrativo(adm);
+//		contenedor.almacenarAdministrativo(adm2);
+
 		/*
 		 * Usuario user = new Usuario("Algo",LocalDate.now(),11111111); Cliente cliente
 		 * = new Cliente();
@@ -234,7 +241,7 @@ public class Principal {
 		case 6:
 			listarUsuarios(contenedor);
 		case 7:
-			//listarUsuarioTipo();
+			listarUsuarioTipo(leer, contenedor);
 			break;
 		case 8:
 			listarCapacitaciones(contenedor);
@@ -264,6 +271,44 @@ public class Principal {
 		 * cliente.setTelefono(leer.nextInt()); leer.nextLine();
 		 */
 
+	}
+
+	private static void listarUsuarioTipo(Scanner scan, Contenedor con) {
+		int opcion;
+
+		System.out.println("------- SELECCIONE TIPO DE USUARIO  -------");
+		System.out.println("   1.  CLIENTE         ");
+		System.out.println("   2.  PROFESIONAL     ");
+		System.out.println("   3.  ADMINISTRATIVO  ");	
+
+		opcion = scan.nextInt();
+		scan.nextLine();
+
+		while(opcion < 1 || opcion > 3) {
+        System.out.println("------- SELECCIONE TIPO DE USUARIO  -------");
+	 	System.out.println("   1.  CLIENTE         ");
+		System.out.println("   2.  PROFESIONAL     ");
+		System.out.println("   3.  ADMINISTRATIVO  ");	
+
+		}
+		switch (opcion) {
+		case 1:
+
+       	 	System.out.println("   LISTA DE  CLIENTES:");
+     	    con.listarUsuariosPorTipo(new Cliente());   	
+			break;
+     	case 2:
+
+       	 	System.out.println("   LISTA DE  PROFESIONALES:");
+     	    con.listarUsuariosPorTipo(new Profesional());   	
+			break;
+     	case 3:
+       	 	System.out.println("   LISTA DE  ADMINISTRATIVOS:");
+     	    con.listarUsuariosPorTipo(new Administrativo());   	
+			break;
+		}
+
+	  	
 	}
 
 }
