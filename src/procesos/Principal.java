@@ -144,6 +144,12 @@ public class Principal {
 		System.out.println("------- LISTA DE CAPACITACIONES -------");
 		con.listarCapacitaciones();
 	}
+	
+	public static void clearTerminal() {
+		System.out.print("\033[H\033[2J");
+		System.out.flush();
+		
+	}
 
 	public static void main(String[] args) {
 
@@ -234,6 +240,7 @@ public class Principal {
 			listarCapacitaciones(contenedor);
 			break;
 		case 9:
+			clearTerminal();
 			System.out.println("HAS SALIDO DEL PROGRAMA. HASTA LUEGO!");
 			System.exit(0);
 			break;
