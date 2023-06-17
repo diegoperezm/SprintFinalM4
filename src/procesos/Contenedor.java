@@ -30,7 +30,7 @@ public class Contenedor {
 
 
 	public void almacenarCliente(Asesoria cliente) {
-       listaAsesorias.add(cliente);	
+       listaAsesorias.add(cliente);
     }
 
 	public void almacenarProfesional(Asesoria profesional) {
