@@ -192,12 +192,6 @@ public class Principal {
 		Scanner leer = new Scanner(System.in);
 		int opcion;
 
-	
-		Profesional pro = new Profesional("algo", LocalDate.of(2002, 05, 20), 12345678, "aaaaaaaaaaa",
-				LocalDate.of(2002, 05, 20));
-		contenedor.almacenarProfesional(pro);
-		Capacitacion cap = new Capacitacion(12345678, "lunes", "20:05", "aaaaaaaaaa", "duracion", 25);
-		contenedor.almacenarCapacitacion(cap);
 		
 		do {
 
